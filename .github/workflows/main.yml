@@ -52,7 +52,7 @@ jobs:
         run: terraform validate
 
       - name: Plan Terraform Changes
-        run: terraform plan -out=tfplan
+        run: terraform plan -out=tfplan -var-file=terraform-module-directory/terraform.tfvars terraform-module-directory
 
   deploy:
     runs-on: ubuntu-latest
