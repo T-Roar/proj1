@@ -1,6 +1,6 @@
 resource "google_compute_address" "external_ip" {
   name = "power-external-ip"
-  region = var.region
+  region = var.gcp_region
 }
 
 resource "google_compute_instance" "power_instance" {
