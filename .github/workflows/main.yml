@@ -34,18 +34,15 @@ jobs:
           export GOOGLE_PROJECT=${{ secrets.GCP_PROJECT_ID }}
           export GOOGLE_ACCESS_TOKEN=$(gcloud auth print-access-token)
 
-      - name: Terraform Validate
-        run: |
-          cd $GITHUB_WORKSPACE
-          terraform validate
-
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: '1.0.0'
 
       - name: Initialize Terraform
-        run: terraform init
+        run: |
+          terraform --version
+          terraform init
 
       - name: Validate Terraform Configuration
         run: terraform validate
