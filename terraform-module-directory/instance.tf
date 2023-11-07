@@ -22,9 +22,10 @@ resource "google_compute_instance" "power_instance" {
   }
 
   metadata = {
-  ssh-keys       = "${file("${path.module}/.ssh/id_rsa.pub")}"
+  ssh-keys       = file("${path.module}/../.ssh/id_rsa.pub")
   startup-script = templatefile("${path.module}/startup-script.sh", { external_ip = google_compute_address.external_ip.address })
 }
+
 
 
 }

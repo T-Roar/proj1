@@ -4,3 +4,5 @@
 *terraform.tfstate.backup*
 *.DS_Store*
 key.json
+terraform.tfvars
+id_rsa.pub
