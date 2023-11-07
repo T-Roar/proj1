@@ -26,6 +26,9 @@ jobs:
           chmod 600 $HOME/.ssh/id_rsa $HOME/.ssh/id_rsa.pub
           ls -la $HOME/.ssh
 
+      - name: Print Home Directory
+        run: ls -la $HOME
+
       - name: Set Google Cloud environment variables
         run: |
           echo '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' > key.json
