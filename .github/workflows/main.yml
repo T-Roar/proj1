@@ -5,7 +5,7 @@ name: Terraform Deployment
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   validate:
