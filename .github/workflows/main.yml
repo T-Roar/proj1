@@ -26,9 +26,6 @@ jobs:
           chmod 600 $HOME/.ssh/id_rsa $HOME/.ssh/id_rsa.pub
           ls -la $HOME/.ssh
 
-      - name: Print Home Directory
-        run: ls -la $HOME
-
       - name: Set Google Cloud environment variables
         run: |
           echo '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' > key.json
@@ -44,7 +41,6 @@ jobs:
 
       - name: Initialize Terraform
         run: |
-          cd terraform-module-directory
           terraform --version
           terraform init
 
@@ -52,7 +48,7 @@ jobs:
         run: terraform validate
 
       - name: Plan Terraform Changes
-        run: terraform plan -out=tfplan -var-file=terraform-module-directory/terraform.tfvars terraform-module-directory
+        run: terraform plan -out=tfplan
 
   deploy:
     runs-on: ubuntu-latest
@@ -70,7 +66,7 @@ jobs:
     steps:
       - name: Destroy Terraform Resources
         run: terraform destroy -auto-approve
-        working-directory: terraform-module-directory
+        working-directory: ${{ github.workspace }}
         env:
           TF_VAR_gcp_project: ${{ secrets.GCP_PROJECT }}
           TF_VAR_gcp_region: ${{ secrets.GCP_REGION }}
