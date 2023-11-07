@@ -44,6 +44,7 @@ jobs:
 
       - name: Initialize Terraform
         run: |
+          cd terraform-module-directory
           terraform --version
           terraform init
 
@@ -69,7 +70,7 @@ jobs:
     steps:
       - name: Destroy Terraform Resources
         run: terraform destroy -auto-approve
-        working-directory: ${{ github.workspace }}
+        working-directory: terraform-module-directory
         env:
           TF_VAR_gcp_project: ${{ secrets.GCP_PROJECT }}
           TF_VAR_gcp_region: ${{ secrets.GCP_REGION }}
